@@ -1,0 +1,14 @@
+# Finding the top 5 customers from the top 10 cities who’ve paid the highest total amounts to Rockbuster
+
+SELECT  A.customer_id, B.first_name, B.last_name, D.city,E.country,  A.amount,
+SUM(amount)AS total_amount
+FROM payment A
+INNER JOIN customer B ON A.customer_id=B.customer_id
+INNER JOIN address C ON B.address_id= C.address_id
+INNER JOIN city D ON C.city_id=D.city_id 
+INNER JOIN country E ON D.country_id=E.country_id
+WHERE city='Ahmadnagar' OR city='Allappuzha (Alleppey)' OR city='Ambattur' OR city='Amroha' OR city='Balurghat' OR city='Berhampore (Baharampur)'OR
+city='Bhavnagar' OR city= 'Bhilwara' OR city='Bhimavaram' OR city='Adoni' 
+GROUP BY  A.customer_id,first_name,last_name, city, country, amount
+ORDER BY total_amount DESC
+LIMIT 5
